@@ -1,10 +1,18 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
+import moviesRouter from "./routes/movies.route.js";
 
 const app = express();
 
 app.get("/", (req, res) => {
   res.send("Well-Come to Movie Find App");
 });
+
+console.log("step 1");
+
+
+app.use("/api/v1/movies", moviesRouter)
 
 const PORT = 4000;
 
