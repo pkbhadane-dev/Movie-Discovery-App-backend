@@ -77,3 +77,4 @@ export const movieDetailService = async (movieId) => {
 
   return { movie: formatMovieDetails(result.data) };
 };
+

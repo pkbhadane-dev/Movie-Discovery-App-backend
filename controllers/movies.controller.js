@@ -19,7 +19,7 @@ export const getMovies = async (req, res) => {
         .json(response.data || response.message);
     }
 
-    res.status(200).json(response);
+    res.status(200).json({ success: true, data: response });
   } catch (error) {
     // console.log(error);
     return res.status(500).json({ error: true, message: error.message });
@@ -43,7 +43,7 @@ export const searchMovie = async (req, res) => {
 
     console.log(response);
 
-    res.status(200).json(response);
+    res.status(200).json({ success: true, data: response });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: true, message: error.message });
@@ -60,9 +60,7 @@ export const discoverMovie = async (req, res) => {
         .json(response.data || response.message);
     }
 
-    console.log(response);
-
-    res.status(200).json(response);
+    res.status(200).json({ success: true, data: response });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: true, message: error.message });
@@ -73,14 +71,14 @@ export const movieDetails = async (req, res) => {
   try {
     const { movieId } = req.query;
     console.log(movieId);
-    
+
     const response = await movieDetailService(movieId);
     if (response.error) {
       return res
         .status(response.status || 500)
         .json({ error: true, message: response.message });
     }
-    res.status(200).json(response);
+    res.status(200).json({ success: true, data: response });
   } catch (error) {
     return res.status(500).json({ error: true, message: error.message });
   }
