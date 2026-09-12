@@ -1,3 +1,5 @@
+import { formatMovies } from "./movieService.js";
+
 export const tmdbService = async (subUrl, option = {}) => {
   console.log(subUrl);
 
@@ -18,6 +20,8 @@ export const tmdbService = async (subUrl, option = {}) => {
     if (!response.ok || data.success === false) {
       return { error: true, status: response.status, data };
     }
+
+    console.log("data", data);
 
     return { data };
   } catch (error) {
