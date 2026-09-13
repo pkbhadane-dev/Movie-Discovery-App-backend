@@ -1,7 +1,15 @@
-import { formatMovies } from "./movieService.js";
+import NodeCache from "node-cache";
+
+// Cache items for 10 minutes (600 seconds)
+const cache = new NodeCache({ stdTTL: 600 });
 
 export const tmdbService = async (subUrl, option = {}) => {
-  console.log(subUrl);
+
+  const cachedData = cache.get(subUrl);
+  if (cachedData && (!option.method || option.method === "GET")) {
+    console.log(`[Cache Hit]: ${subUrl}`);
+    return { data: cachedData };
+  }
 
   const url = `https://api.themoviedb.org/3/${subUrl}`;
 
@@ -21,7 +29,10 @@ export const tmdbService = async (subUrl, option = {}) => {
       return { error: true, status: response.status, data };
     }
 
-    console.log("data", data);
+    // console.log("data", data);
+    if (!option.method || option.method === "GET") {
+      cache.set(subUrl, data);
+    }
 
     return { data };
   } catch (error) {
