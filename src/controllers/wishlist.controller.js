@@ -3,6 +3,8 @@ import { addToWishlistService, getWishlistService, removeFromWishlistService } f
 export const addToWishlist = async (req, res) => {
   try {
     const { movieId, title, poster, rating, releaseDate } = req.body;
+    console.log("movieId", movieId);
+    
     if (!movieId || !title) {
       return res
         .status(400)

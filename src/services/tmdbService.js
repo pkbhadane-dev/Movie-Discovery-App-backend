@@ -30,7 +30,6 @@ export const tmdbService = async (subUrl, option = {}) => {
     clearTimeout(timeoutId);
 
     const data = await response.json();
-    console.log(response);
 
     if (!response.ok || data.success === false) {
       return { error: true, status: response.status, data };

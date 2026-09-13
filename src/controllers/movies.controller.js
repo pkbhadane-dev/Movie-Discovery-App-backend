@@ -7,12 +7,9 @@ import {
 
 export const getMovies = async (req, res) => {
   try {
-    console.log("step 3");
-
     const { page = 1 } = req.query;
     const response = await getMoviesService(page);
 
-    console.log(response);
     if (response.error) {
       return res
         .status(response.status || 500)
@@ -43,9 +40,6 @@ export const searchMovie = async (req, res) => {
         .status(response.status || 500)
         .json(response.data || response.message);
     }
-
-    console.log(response);
-
     return res.status(200).json({ success: true, data: response.movie || [] });
   } catch (error) {
     console.log(error);
@@ -57,12 +51,13 @@ export const discoverMovie = async (req, res) => {
   try {
     const { genre, sortBy, page = 1 } = req.query;
     const response = await discoverMovieService({ genre, sortBy, page });
+    
     if (response.error) {
       return res
         .status(response.status || 500)
         .json(response.data || response.message);
     }
-
+    console.log("response", response);
     return res.status(200).json({ success: true, data: response.movie || [] });
   } catch (error) {
     console.log(error);
@@ -73,8 +68,6 @@ export const discoverMovie = async (req, res) => {
 export const movieDetails = async (req, res) => {
   try {
     const { movieId } = req.params;
-    console.log(movieId);
-
     const response = await movieDetailService(movieId);
     if (response.error) {
       return res

@@ -14,11 +14,11 @@ app.use(
   }),
 );
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Well-Come to Movie Find App");
 });
-
-console.log("step 1");
 
 app.use("/api/v1/movies", moviesRouter);
 

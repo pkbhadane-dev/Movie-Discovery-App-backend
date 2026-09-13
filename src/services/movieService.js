@@ -58,6 +58,9 @@ export const discoverMovieService = async ({
   }
   params.append("sort_by", sortBy);
   params.append("page", page);
+  if (sortBy === "vote_average.desc") {
+    params.append("vote_count.gte", "200");
+  }
 
   const subUrl = `discover/movie?${params.toString()}`;
 
@@ -70,9 +73,6 @@ export const discoverMovieService = async ({
 };
 
 export const movieDetailService = async (movieId) => {
-  console.log("step 4");
-  console.log("movieId", movieId);
-
   const subUrl = `movie/${movieId}`;
   const result = await tmdbService(subUrl);
 
