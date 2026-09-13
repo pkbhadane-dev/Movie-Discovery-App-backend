@@ -3,7 +3,7 @@ import {
   getMoviesService,
   movieDetailService,
   searchMovieService,
-} from "../src/services/movieService.js";
+} from "../services/movieService.js";
 
 export const getMovies = async (req, res) => {
   try {
@@ -19,7 +19,10 @@ export const getMovies = async (req, res) => {
         .json(response.data || response.message);
     }
 
-    res.status(200).json({ success: true, data: response });
+    return res.status(200).json({
+      success: true,
+      data: response.movie || [],
+    });
   } catch (error) {
     // console.log(error);
     return res.status(500).json({ error: true, message: error.message });
@@ -43,7 +46,7 @@ export const searchMovie = async (req, res) => {
 
     console.log(response);
 
-    res.status(200).json({ success: true, data: response });
+    return res.status(200).json({ success: true, data: response.movie || [] });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: true, message: error.message });
@@ -60,7 +63,7 @@ export const discoverMovie = async (req, res) => {
         .json(response.data || response.message);
     }
 
-    res.status(200).json({ success: true, data: response });
+    return res.status(200).json({ success: true, data: response.movie || [] });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: true, message: error.message });
@@ -69,7 +72,7 @@ export const discoverMovie = async (req, res) => {
 
 export const movieDetails = async (req, res) => {
   try {
-    const { movieId } = req.query;
+    const { movieId } = req.params;
     console.log(movieId);
 
     const response = await movieDetailService(movieId);
@@ -78,7 +81,7 @@ export const movieDetails = async (req, res) => {
         .status(response.status || 500)
         .json({ error: true, message: response.message });
     }
-    res.status(200).json({ success: true, data: response });
+    return res.status(200).json({ success: true, data: response.movie });
   } catch (error) {
     return res.status(500).json({ error: true, message: error.message });
   }

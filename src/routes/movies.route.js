@@ -12,7 +12,7 @@ const moviesRouter = express.Router();
 moviesRouter.get("/getMovies", getMovies);
 moviesRouter.get("/searchMovie", searchMovie);
 moviesRouter.get("/discoverMovie", discoverMovie);
-moviesRouter.get("/movieDetail", movieDetails);
+moviesRouter.get("/movieDetail/:movieId", movieDetails);
 
 
 moviesRouter.post("/addToWishlist", addToWishlist);

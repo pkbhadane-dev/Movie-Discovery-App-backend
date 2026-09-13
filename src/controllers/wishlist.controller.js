@@ -1,4 +1,4 @@
-import { addToWishlistService, getWishlistService, removeFromWishlistService } from "../src/services/wishlistService.js";
+import { addToWishlistService, getWishlistService, removeFromWishlistService } from "../services/wishlistService.js";
 
 export const addToWishlist = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-import { Wishlist } from "../../models/wishlist.model.js";
+import { Wishlist } from "../models/wishlist.model.js";
 
 export const addToWishlistService = async (movieData) => {
   const existingMovie = await Wishlist.findOne({ movieId: movieData.movieId });

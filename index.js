@@ -1,10 +1,18 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-import moviesRouter from "./routes/movies.route.js";
+import cors from "cors";
 import { connectDB } from "./src/db/connectDB.js";
+import moviesRouter from "./src/routes/movies.route.js";
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 
 app.get("/", (req, res) => {
   res.send("Well-Come to Movie Find App");

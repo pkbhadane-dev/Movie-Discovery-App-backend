@@ -28,22 +28,23 @@ export const formatMovieDetails = (movie) => {
 };
 
 export const getMoviesService = async (page = 1) => {
-  const subUrl = `discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`;
+  const subUrl = `movie/popular?page=${page}`;
   const result = await tmdbService(subUrl);
 
-  if (result.data?.results) {
-    return { movie: result.data.results.map(formatMovies) };
-  }
-  return result;
+  if (result.error) return result;
+
+  const rawList = result.data?.results || [];
+  return { movie: rawList.map(formatMovies) };
 };
 
 export const searchMovieService = async (search, page = 1) => {
-  const subUrl = `search/movie?query=${encodeURIComponent(search)}&include_adult=false&language=en-US&page=${page}`;
+  const subUrl = `search/movie?query=${encodeURIComponent(search)}&include_adult=false&page=${page}`;
   const result = await tmdbService(subUrl);
-  if (result.data?.results) {
-    return { movie: result.data.results.map(formatMovies) };
-  }
-  return result;
+
+  if (result.error) return result;
+
+  const rawList = result.data?.results || [];
+  return { movie: rawList.map(formatMovies) };
 };
 
 export const discoverMovieService = async ({
@@ -62,10 +63,10 @@ export const discoverMovieService = async ({
 
   const result = await tmdbService(subUrl);
 
-  if (result.data?.results) {
-    return { movie: result.data.results.map(formatMovies) };
-  }
-  return result;
+  if (result.error) return result;
+
+  const rawList = result.data?.results || [];
+  return { movie: rawList.map(formatMovies) };
 };
 
 export const movieDetailService = async (movieId) => {
@@ -75,6 +76,7 @@ export const movieDetailService = async (movieId) => {
   const subUrl = `movie/${movieId}`;
   const result = await tmdbService(subUrl);
 
+  if (result.error) return result;
+
   return { movie: formatMovieDetails(result.data) };
 };
-
