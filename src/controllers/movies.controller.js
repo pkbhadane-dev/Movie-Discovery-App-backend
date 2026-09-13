@@ -57,7 +57,7 @@ export const discoverMovie = async (req, res) => {
         .status(response.status || 500)
         .json(response.data || response.message);
     }
-    console.log("response", response);
+   
     return res.status(200).json({ success: true, data: response.movie || [] });
   } catch (error) {
     console.log(error);
