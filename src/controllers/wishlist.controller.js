@@ -1,4 +1,4 @@
-import { addToWishlistService } from "../services/wishlistService";
+import { addToWishlistService, getWishlistService, removeFromWishlistService } from "../src/services/wishlistService.js";
 
 export const addToWishlist = async (req, res) => {
   try {
@@ -31,7 +31,7 @@ export const getWishlist = async (req, res) => {
   }
 };
 
-// Remove from Wishlist
+
 export const removeFromWishlist = async (req, res) => {
   try {
     const { id } = req.params; // movieId

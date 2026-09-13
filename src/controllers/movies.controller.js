@@ -3,7 +3,7 @@ import {
   getMoviesService,
   movieDetailService,
   searchMovieService,
-} from "../services/movieService.js";
+} from "../src/services/movieService.js";
 
 export const getMovies = async (req, res) => {
   try {

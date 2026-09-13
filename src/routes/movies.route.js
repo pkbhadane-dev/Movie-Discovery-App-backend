@@ -5,13 +5,17 @@ import {
   movieDetails,
   searchMovie,
 } from "../controllers/movies.controller.js";
+import { addToWishlist, getWishlist, removeFromWishlist } from "../controllers/wishlist.controller.js";
 
 const moviesRouter = express.Router();
-console.log("step 2");
 
 moviesRouter.get("/getMovies", getMovies);
 moviesRouter.get("/searchMovie", searchMovie);
 moviesRouter.get("/discoverMovie", discoverMovie);
-moviesRouter.get("/:movieDetail", movieDetails);
+moviesRouter.get("/movieDetail", movieDetails);
 
+
+moviesRouter.post("/addToWishlist", addToWishlist);
+moviesRouter.get("/wishlist", getWishlist);
+moviesRouter.delete("/wishlist/:id", removeFromWishlist);
 export default moviesRouter;
